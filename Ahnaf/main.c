@@ -90,7 +90,7 @@ void initializeRooms()
     }
     printf("Default rooms initialized!\n");
 }
-
+// done by tahsin
 void AddRoom()
 {
     int roomNumber, floor, basePrice, isOccupied;
