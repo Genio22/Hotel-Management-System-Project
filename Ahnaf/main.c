@@ -1,5 +1,5 @@
 
-/* comment */
+/* Hotel-Management-System-Project */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
