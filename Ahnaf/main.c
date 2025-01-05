@@ -74,12 +74,16 @@ void showMenu()
     printf("Enter your choice: ");
 }
 
-
 // rand();
 
 void initializeRooms(int MAX_FLOORS)
 {
     int roomNumber = 1;
+    char *type[] = {"single", "double"};
+    char *view[] = {"Sea View", "City View"};
+    char *ac_type[] = {"AC Room", "Non AC Room"};
+    int basePrice[] = {1350, 2000, 1200};
+    int basePrice1[] = {3000, 5000};
     for (int floor = 1; floor <= MAX_FLOORS; floor++) // total floor in building
     {
         for (int i = 0; i < 4; i++) // akta floor e 4 ta room
@@ -87,19 +91,18 @@ void initializeRooms(int MAX_FLOORS)
             hotelRooms[roomCount].roomNumber = (floor * 100) + (i + 1); // one kore room number bariteche // new fix room number by floor
 
             hotelRooms[roomCount].floor = floor; // for each iteration floor remain same
-            if (i % 2 == 0)                      // amni akt logic to get value for other parameter
+            // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter
+            strcpy(hotelRooms[roomCount].type, type[rand() % 2]);
+            strcpy(hotelRooms[roomCount].view, view[rand() % 2]);
+            strcpy(hotelRooms[roomCount].ac_type, ac_type[rand() % 2]);
+            if (!strcmp(hotelRooms[roomCount].view, "Sea View") && !strcmp(hotelRooms[roomCount].ac_type, "AC Room"))
             {
-                strcpy(hotelRooms[roomCount].type, "Single");
-                strcpy(hotelRooms[roomCount].view, "Sea View");
-                strcpy(hotelRooms[roomCount].ac_type, "AC Room");
-                hotelRooms[roomCount].basePrice = 1350;
+
+                hotelRooms[roomCount].basePrice = basePrice1[rand() % 2];
             }
             else
             {
-                strcpy(hotelRooms[roomCount].type, "Double");
-                strcpy(hotelRooms[roomCount].view, "City View");
-                strcpy(hotelRooms[roomCount].ac_type, "Non AC Room");
-                hotelRooms[roomCount].basePrice = 2000;
+                hotelRooms[roomCount].basePrice = basePrice[rand() % 3];
             }
             hotelRooms[roomCount].isOccupied = 0;
             roomCount++;
@@ -199,6 +202,15 @@ void book_room()
         }
     }
 }
+
+// void book_room(char hotel[ROOMS][20], int room) {
+//     if (strcmp(hotel[room], "Available") == 0) {
+//         strcpy(hotel[room], "Booked");
+//         printf("Room %d has been booked successfully!\n", room + 1);
+//     } else {
+//         printf("Room %d is already booked.\n", room + 1);
+//     }
+// }
 
 // int calculatePrice(Room *room, int stayDuration, int month) {
 //     int price = room->basePrice;
