@@ -29,6 +29,7 @@ void initializeRooms();
 void displayRooms();
 void AddRoom();
 void book_room();
+void checkout();
 
 int main()
 {
@@ -38,7 +39,7 @@ int main()
     scanf("%d", &MAX_FLOORS);
     initializeRooms(MAX_FLOORS);
 
-    while (choice != 4)
+    while (choice != 5)
     {
         showMenu();
         scanf("%d", &choice);
@@ -54,6 +55,9 @@ int main()
             book_room();
             break;
         case 4:
+            checkout();
+            break;
+        case 5:
             printf("See you. Bye:)");
             return 0;
 
@@ -69,8 +73,9 @@ void showMenu()
     printf("\n--- Hotel Management System ---\n");
     printf("1. Display Available Rooms\n");
     printf("2. Add a Room\n");
-    printf("3. Book Romm\n");
-    printf("4. Exit\n");
+    printf("3. Room Booking\n");
+    printf("4. Checkout\n");
+    printf("5. Exit\n");
     printf("Enter your choice: ");
 }
 
@@ -201,6 +206,30 @@ void book_room()
             break;
         }
     }
+}
+
+void checkout()
+{
+    int roomNumber = 0;
+    printf("Enter Room number: ");
+    scanf("%d", &roomNumber);
+    for (int i = 0; i < roomCount; i++)
+    {
+        if (roomNumber == hotelRooms[i].roomNumber)
+        {
+            if (hotelRooms[i].isOccupied)
+            {
+                hotelRooms[i].isOccupied = 0;
+                printf("You have been succesfully checkout from Room %d!\n", hotelRooms[i].roomNumber);
+            }
+            else
+            {
+                printf("Room %d is already Unoccupied. So checkout is not possible.\n", hotelRooms[i].roomNumber);
+            }
+            break;
+        }
+    }
+    // done by sa
 }
 
 // void book_room(char hotel[ROOMS][20], int room) {
