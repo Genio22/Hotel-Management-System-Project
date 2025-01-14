@@ -1,16 +1,18 @@
-
-
 /* Hotel-Management-System-Project */
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // rad() use kora lagche
 #include <string.h>
 
+#define HOTEL_NAME "Paradise"
+#define HOTEL_ADDRESS "Cox Bazer"
+#define HOTEL_PHONE "01922322354"
+#define HOTEL_EMAIL "hotelparadise@gmail.com"
 #define MAX_ROOMS 100
-// #define MAX_FLOORS 10
+#define MAX_FLOORS 10
 #define max_user 100
 #define ADMIN_USERNAME "admin"
 #define ADMIN_PASSWORD "admin123"
-#define USER_USERNAME "user"
+// #define USER_USERNAME ""
 #define USER_PASSWORD "user123"
 
 // Room structure
@@ -35,6 +37,8 @@ typedef struct
     char idType[30]; // e.g., Passport, Driver's License
     char idNumber[30];
     int roomNumber;
+    int total_price;
+    int base_price;
     int stayDuration;
     char checkInDate[15];
     char checkOutDate[15];
@@ -43,130 +47,103 @@ typedef struct
 // Global variables
 Room hotelRooms[MAX_ROOMS];
 customer c[max_user];
-int roomCount = 0, MAX_FLOORS = 0, userCount = 0;
+int roomCount = 0, userCount = 0;
 
 // Function prototypes
-void showMenu();
+
+// Logo er part
+void print_logo();
+
+// Login and it menu type
+int login(const char *username, const char *password);
+void showAdminMenu();
+void showUserMenu();
+
+// void showMenu();
+
 void initializeRooms();
 void displayRooms();
 void AddRoom();
+
+// book room er part
 void book_room();
 int calculatePrice(Room *room, int stayDuration, int month);
 int isPeakSeason();
+// ai porjonto
+
 void checkout();
-void savefile();
-void saveAndDisplayBookedUsers();
-void displaySavedUsers();
-// void savefile_user();
 
-// void printUserData() {
-//     FILE *f2;
-//     f2 = fopen("User.txt", "r");
-
-//     if (f2 == NULL) {
-//         printf("Error opening file!\n");
-//         return;
-//     }
-
-//     int userCount;
-//     fread(&userCount, sizeof(int), 1, f2);
-
-//     if (userCount == 0) {
-//         printf("No users found in the file.\n");
-//     } else {
-//         printf("\n--- Customer Booking Data ---\n");
-//         printf("-------------------------------------------------------------\n");
-//         printf("| Name             | Phone Number   | Room Number | Check-in Date  |\n");
-//         printf("-------------------------------------------------------------\n");
-
-//         customer temp;
-//         for (int i = 0; i < userCount; i++) {
-//             fread(&temp, sizeof(customer), 1, f2);
-
-//             printf("| %-17s | %-15s | %-11d | %-15s |\n",
-//                    temp.name, temp.phoneNumber, temp.roomNumber, temp.checkInDate);
-//         }
-
-//         printf("-------------------------------------------------------------\n");
-//     }
-
-//     fclose(f2);
-// }
-
-void printCustomerDetails(int i)
-{
-    printf("\nCustomer Booking Details:\n");
-    printf("-------------------------------\n");
-    printf("Name: %s\n", c[i].name);
-    printf("Phone Number: %s\n", c[i].phoneNumber);
-    printf("Email: %s\n", c[i].email);
-    printf("Address: %s\n", c[i].address);
-    printf("ID Type: %s\n", c[i].idType);
-    printf("ID Number: %s\n", c[i].idNumber);
-    // printf("Duration of Stay (in days): %d\n", stayDuration);
-    // printf("Month: %d\n", month);
-    printf("Check-in Date: %s\n", c[i].checkInDate);
-    printf("Check-out Date: %s\n", c[i].checkOutDate);
-    printf("-------------------------------\n");
-}
+// File er part
+void save_book_users_data();
+void display_book_users_data();
+void save_Room_Details_data();
+void display_Room_Details_data();
+void print_bill(int i);
 
 int main()
 {
     int choice = 0;
 
-    printf("Welcome to the Hotel Management System\n");
-    printf("Enter the total number of floors in the hotel: ");
-    scanf("%d", &MAX_FLOORS);
-    getchar(); // Clear the newline character from the input buffer.
+    print_logo();
+    printf("\n\nWelcome to the Hotel Management System\n");
+    // printf("Enter the total number of floors in the hotel: ");
+    // scanf("%d", &MAX_FLOORS);
+    // getchar();
 
-    // Initialize rooms based on the total number of floors.
-    initializeRooms(MAX_FLOORS);
-
+    initializeRooms(); // first e rooms Initialize kotechi based on the total number of floors.
     printf("\nPlease login to access the system:\n");
     int loginType = 0;
-
-    // Prompt for login type: Admin or User
-    printf("1. Admin Login\n");
-    printf("2. User Login\n");
-    printf("Enter your choice (1 for Admin, 2 for User): ");
-    scanf("%d", &loginType);
-    getchar(); // Clear the newline character from the input buffer.
-
-    int isLoggedIn = 0;
-
-    // Login validation for Admin or User
-    if (loginType == 1)
+    while (loginType != 3)
     {
-        isLoggedIn = login(ADMIN_USERNAME, ADMIN_PASSWORD);
-        if (isLoggedIn)
+        /* code */
+
+        // login type: Admin or User
+        printf("1. Admin Login\n");
+        printf("2. User Login\n");
+        printf("3. Exit\n");
+        printf("Enter your choice (1 for Admin, 2 for User): ");
+        scanf("%d", &loginType);
+        getchar();
+
+        int isLoggedIn = 0;
+
+        // Login validation for Admin or User
+        if (loginType == 1)
         {
-            printf("\nAdmin login successful!\n");
+            isLoggedIn = login(ADMIN_USERNAME, ADMIN_PASSWORD);
+            if (isLoggedIn)
+            {
+                printf("\nAdmin login successful!\n");
+                break;
+            }
+            else
+            {
+                printf("\nAdmin login failed. Please try again.\n");
+            }
+        }
+        else if (loginType == 2)
+        {
+            isLoggedIn = 1; // Assume user login is always successful for now
+            if (isLoggedIn)
+            {
+                printf("\nUser login successful!\n");
+                break;
+            }
+            else
+            {
+                printf("\nUser login failed. Please try again.\n");
+            }
+        }
+        else if (loginType == 3)
+        {
+            printf("\nExiting system. Goodbye!\n");
+            return 0;
         }
         else
         {
-            printf("\nAdmin login failed. Exiting system.\n");
-            return 0;
+            printf("\nInvalid choice. Please try again.\n");
         }
     }
-    else if (loginType == 2)
-    {
-        isLoggedIn = login(USER_USERNAME, USER_PASSWORD);
-        if (isLoggedIn)
-        {
-            printf("\nUser login successful!\n");
-        }
-        else
-        {
-            printf("\nUser login failed. Exiting system.\n");
-            return 0;
-        }
-    }
-    else
-    {
-        printf("\nInvalid login type. Exiting system.\n");
-        return 0;
-    }
-
     // Menu loop for Admin or User
     while (choice != 5)
     {
@@ -180,7 +157,7 @@ int main()
         }
 
         scanf("%d", &choice);
-        getchar(); // Clear the newline character from the input buffer.
+        getchar();
 
         switch (choice)
         {
@@ -212,11 +189,20 @@ int main()
             break;
         case 5: // Exit
             printf("Exiting the system. Goodbye!\n");
-            savefile(); // Save data to file before exiting
-            saveAndDisplayBookedUsers();
+            // savefile(); // Save data to file before exiting
+            // saveAndDisplayBookedUsers();
+            save_book_users_data();
+            save_Room_Details_data();
+            // display_Room_Details_data();
             return 0;
         case 6:
-            displaySavedUsers();
+            display_book_users_data();
+            break;
+        case 7:
+            display_Room_Details_data();
+            break;
+        case 8:
+            print_bill(0);
             break;
         default: // Invalid input
             printf("Invalid choice. Please try again.\n");
@@ -226,54 +212,17 @@ int main()
     return 0;
 }
 
-
-/*
-int main()
+void print_logo()
 {
-    int choice = 0;
-    printf("Enter the floor: ");
-
-    scanf("%d", &MAX_FLOORS);
-    initializeRooms(MAX_FLOORS);
-    // savefile();
-
-    while (choice != 5)
-    {
-        showMenu();
-        scanf("%d", &choice);
-        getchar();
-        switch (choice)
-        {
-        case 1:
-            displayRooms();
-            break;
-        case 2:
-            AddRoom();
-            break;
-        case 3:
-            book_room();
-            break;
-        case 4:
-            checkout();
-            break;
-        case 5:
-            printf("See you. Bye:)");
-            printCustomerDetails(0);
-            savefile();
-            saveAndDisplayBookedUsers();
-            // savefile_user();
-            printf("Data Saved in file");
-            // printUserData();
-            return 0;
-
-        default:
-            printf("Invalid choice. Please try again.\n");
-        }
-    }
-
-    return 0;
+    printf("                                  (                               \n");
+    printf("   (                   )     (    )\\ )        )                )  \n");
+    printf("   )\\          )    ( /(   ) )\\  (()/\\  (  ( /((     (    ) ( /(  \n");
+    printf(" (((_)  (   ( /( (  )\\()| /(((_)  /(_))))\\ )\\())(   ))\\( /( )\\()) \n");
+    printf(" )\\___  )\\  )(_)))\\(_))/)(_))_   (_)) /((_|_))(()\\ /((_)(_)|_))/  \n");
+    printf("((/ __|((_)((_)_((_) |_((_)_| |  | _ (_)) | |_ ((_|_))((_)_| |_   \n");
+    printf(" | (__/ _ \\/ _` (_-<  _/ _` | |  |   / -_)|  _| '_/ -_) _` |  _|  \n");
+    printf("  \\___\\___/\\__,_/__/\\__\\__,_|_|  |_|_\\___| \\__|_| \\___\\__,_|\\__|  \n");
 }
-*/
 
 // admin and user login interfage
 int login(const char *username, const char *password)
@@ -297,64 +246,58 @@ int login(const char *username, const char *password)
 
 void showAdminMenu()
 {
-    printf("\n--- Hotel Management System ---\n");
-    printf("1. Display Available Rooms\n");
-    printf("2. Add a Room\n");
-    printf("3. Room Booking\n");
-    printf("4. Checkout\n");
-    printf("5. Exit\n");
+    printf("\n********************************************\n");
+    printf("*        Welcome to HOTEL %s        *\n", HOTEL_NAME);
+    printf("********************************************\n");
+    // printf("*                 ADMIN                    *\n");
+    printf("*  1. Display Available Rooms              *\n");
+    printf("*  2. Add a Room                           *\n");
+    printf("*  3. Room Booking                         *\n");
+    printf("*  4. Checkout                             *\n");
+    printf("*  5. Exit                                 *\n");
+    printf("********************************************\n");
     printf("Enter your choice: ");
 }
 
 void showUserMenu()
 {
-    printf("\n--- User Menu ---\n");
-    printf("1. Display Available Rooms\n");
-    printf("2. Book a Room\n");
-    printf("3. Exit\n");
+    printf("\n********************************************\n");
+    printf("*        Welcome to HOTEL %s         *\n", HOTEL_NAME);
+    printf("********************************************\n");
+    printf("*  1. Display Available Rooms              *\n");
+    printf("*  3. Book a Room                          *\n");
+    printf("*  5. Exit                                 *\n");
+    printf("********************************************\n");
     printf("Enter your choice: ");
 } // code by al amin (login function )
 
-void showMenu()
-{
-    printf("\n--- Hotel Management System ---\n");
-    printf("1. Display Available Rooms\n");
-    printf("2. Add a Room\n");
-    printf("3. Room Booking\n");
-    printf("4. Checkout\n");
-    printf("5. Exit\n");
-    printf("Enter your choice: ");
-}
-
-// rand();
-
-void initializeRooms(int MAX_FLOORS)
+void initializeRooms()
 {
     int roomNumber = 1;
-    char *type[] = {"single", "double"};
+    char *type[] = {"single", "double", "deluxe"};
     char *view[] = {"Sea View", "City View"};
     char *ac_type[] = {"AC Room", "Non AC Room"};
-    int basePrice[] = {1350, 2000, 1200};
+    int basePrice[] = {1350, 1200, 1000, 1500};
     int basePrice1[] = {3000, 5000};
     for (int floor = 1; floor <= MAX_FLOORS; floor++) // total floor in building
     {
-        for (int i = 0; i < 4; i++) // akta floor e 4 ta room
+        for (int i = 0; i < (MAX_ROOMS / MAX_FLOORS); i++) // akta floor e 4 ta room
         {
             hotelRooms[roomCount].roomNumber = (floor * 100) + (i + 1); // one kore room number bariteche // new fix room number by floor
 
             hotelRooms[roomCount].floor = floor; // for each iteration floor remain same
             // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter
-            strcpy(hotelRooms[roomCount].type, type[rand() % 2]);
+            strcpy(hotelRooms[roomCount].type, type[rand() % 3]);
             strcpy(hotelRooms[roomCount].view, view[rand() % 2]);
             strcpy(hotelRooms[roomCount].ac_type, ac_type[rand() % 2]);
-            if (!strcmp(hotelRooms[roomCount].view, "Sea View") && !strcmp(hotelRooms[roomCount].ac_type, "AC Room"))
+            if ((!strcmp(hotelRooms[roomCount].view, "Sea View") && !strcmp(hotelRooms[roomCount].ac_type, "AC Room")) || !strcmp(hotelRooms[roomCount].type, "deluxe"))
             {
 
                 hotelRooms[roomCount].basePrice = basePrice1[rand() % 2];
             }
             else
             {
-                hotelRooms[roomCount].basePrice = basePrice[rand() % 3];
+                hotelRooms[roomCount].basePrice = basePrice[rand() % 4];
             }
             hotelRooms[roomCount].isOccupied = 0;
             roomCount++;
@@ -409,28 +352,6 @@ void AddRoom()
 
 void displayRooms()
 {
-    /*printf("\n--- Available Rooms ---\n");
-    for (int i = 0; i < roomCount; i++)
-    {
-        if (!hotelRooms[i].isOccupied)
-        {
-            printf("Room Number: %d, Floor: %d, Type: %s, View: %s, AC type: %s, Base Price: %dtake\n",
-                   hotelRooms[i].roomNumber, hotelRooms[i].floor,
-                   hotelRooms[i].type, hotelRooms[i].view, hotelRooms[i].ac_type,
-                   hotelRooms[i].basePrice);
-        }
-    }
-    printf("\n--- Occupied Rooms ---\n");
-    for (int i = 0; i < roomCount; i++)
-    {
-        if (hotelRooms[i].isOccupied)
-        {
-            printf("Room Number: %d, Floor: %d, Type: %s, View: %s, AC type: %s, Base Price: %dtake\n",
-                   hotelRooms[i].roomNumber, hotelRooms[i].floor,
-                   hotelRooms[i].type, hotelRooms[i].view, hotelRooms[i].ac_type,
-                   hotelRooms[i].basePrice);
-        }
-    }*/
     printf("\nRoom Data:\n");
     printf("-----------------------------------------------------------------------------\n");
     printf("| Room No | Floor | Type     | View       | AC Type     | Occupied | Price  |\n");
@@ -457,18 +378,18 @@ void book_room()
     char type[30], view[30], ac[30];
     int foundroom[MAX_ROOMS];
     int foundcount = 0;
-    int found = 0, stayDuration, month;
+    int room_found = 0, stayDuration, month;
 
     printf("Enter the room type (single/double): ");
     scanf("%[^\n]s", type);
-    getchar(); // to clear the buffer
+    getchar();
 
     // Filter by type and store it in custom local array
     for (int i = 0; i < roomCount; i++)
     {
         if (hotelRooms[i].isOccupied == 0 && strcmp(hotelRooms[i].type, type) == 0)
         {
-            foundroom[foundcount++] = i;
+            foundroom[foundcount++] = i; // adding all required type to foundroom
         }
     }
 
@@ -483,7 +404,7 @@ void book_room()
         {
             for (int j = i; j < foundcount - 1; j++)
             {
-                foundroom[j] = foundroom[j + 1]; // removing the not match item
+                foundroom[j] = foundroom[j + 1]; // match shara gulo remove
             }
             foundcount--;
         }
@@ -538,11 +459,11 @@ void book_room()
         }
 
         printf("----------------------------------------------------------------------------------\n");
+        printf("Enter the Room Number to book: ");
+        scanf("%d", &roomNumber);
+        getchar();
+        // printf("%d\n", roomNumber);
     }
-    printf("Enter the Room Number to book: ");
-    scanf("%d", &roomNumber);
-    getchar();
-    printf("%d\n", roomNumber);
 
     for (int i = 0; i < max_user; i++)
     {
@@ -551,14 +472,16 @@ void book_room()
 
     for (int i = 0; i < foundcount; i++)
     {
-        if (hotelRooms[foundroom[i]].roomNumber == roomNumber)
+        int idx = foundroom[i];
+        if (hotelRooms[idx].roomNumber == roomNumber)
         {
-          printf("%d\n", hotelRooms[foundroom[i]].roomNumber);
+            // printf("%d\n", hotelRooms[foundroom[i]].roomNumber);
+            room_found = 1;
             for (int j = 0; j < max_user; j++)
             {
                 if (c[j].roomNumber == 0)
                 {
-                    printf("%d", j);
+                    // printf("%d", j);
                     printf("Name: ");
                     scanf("%[^\n]s", c[j].name);
                     getchar();
@@ -570,17 +493,16 @@ void book_room()
                     getchar();
                     printf("Enter Address: ");
                     scanf("%[^\n]s", c[j].address);
-                    getchar(); // To clear newline from buffer
-
+                    getchar();
                     printf("Enter ID Type (e.g., Passport, Driver's License): ");
                     scanf("%[^\n]s", c[j].idType);
                     getchar();
-
                     printf("Enter ID Number: ");
                     scanf("%[^\n]s", c[j].idNumber);
                     getchar();
                     printf("Enter the duration of stay (in days): ");
                     scanf("%d", &stayDuration);
+                    getchar();
                     printf("Enter the current month (1-12): ");
                     scanf("%d", &month);
                     getchar();
@@ -591,21 +513,68 @@ void book_room()
                     scanf("%[^\n]s", c[j].checkOutDate);
                     getchar();
                     c[j].roomNumber = roomNumber;
-                    int totalPrice = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
+                    c[j].base_price = hotelRooms[idx].basePrice;
+                    c[j].total_price = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
                     hotelRooms[foundroom[i]].isOccupied = 1;
-                    printf("Mr/Ms %s. You room %d have successfully been booked! \nTotal price for %d days is: %d\n",
-                           c[j].name, roomNumber, stayDuration, totalPrice);
+                    // printf("Mr/Ms %s. You room %d have successfully been booked! \nTotal price for %d days is: %d\n",
+                    //        c[j].name, roomNumber, stayDuration, totalPrice);
+                    printf("\n\n\n");
+                    printf("************************************************************************\n");
+                    printf("         Dear %s, \n", c[j].name);
+                    printf("         Your booking for room number %d \n", roomNumber);
+                    printf("         The total price for your stay of %d days is: %d \n", stayDuration, c[j].total_price);
+                    printf("         Thank you for choosing our hotel. We look forward to your stay.\n");
+                    printf("************************************************************************\n");
+                    printf("\n");
+                    printf("\t\t\tYour bill have been printed\n\n\n");
+                    print_bill(j);
                     userCount++;
                     break;
                 }
             }
             break;
         }
-        else
-        {
-            printf("The given room doesn't meet you requirement");
-        }
     }
+    if (room_found == 0 && foundcount != 0)
+    {
+        printf("The given room doesn't meet your requirement.\n");
+    }
+}
+
+int calculatePrice(Room *room, int stayDuration, int month)
+{
+    int price = room->basePrice;
+
+    if (isPeakSeason(month))
+    {
+        price *= 1.2;
+    }
+
+    if (stayDuration > 7)
+    {
+        price *= 0.85;
+    }
+    else if (stayDuration < 3)
+    {
+        price *= 1.15;
+    }
+
+    // if (strcmp(room->view, "Sea View") == 0)
+    //{
+    //     price *= 1.2;
+    // }
+
+    return price * stayDuration;
+}
+
+int isPeakSeason(int month)
+{
+    // peak season months ->June (6), July (7), November (11), December (12)
+    if (month == 6 || month == 7 || month == 11 || month == 12)
+    {
+        return 1;
+    }
+    return 0;
 }
 
 void checkout()
@@ -629,67 +598,92 @@ void checkout()
             break;
         }
     }
-    // done by sahaf
 }
 
-void savefile()
+void save_Room_Details_data()
 {
-    FILE *f1;
-    f1 = fopen("text2.txt", "w");
-    // for (int i = 0; i < roomCount; i++)
-    // {
-    // fwrite(hotelRooms, sizeof(Room), 1, f1);
-    //}
-    for (int i = 0; i < MAX_ROOMS; i++)
+    FILE *file = fopen("Room_details.txt", "w");
+    if (file == NULL)
     {
-        fwrite(&roomCount, sizeof(int), 1, f1);
-        fwrite(hotelRooms, sizeof(Room), roomCount, f1);
+        printf("Error: Could not open file for saving room details.\n");
+        return;
     }
-    fclose(f1);
+
+    if (roomCount == 0)
+    { // Check if no rooms are available
+        printf("No rooms are available.\n");
+        fprintf(file, "No rooms are available.\n");
+        fclose(file);
+        return;
+    }
+
+    // Print room data for console debuger jono
+    // printf("----------------------------------------------------------------------------------------\n");
+    // printf("| Room Number  | Floor | Type      | View      | AC Type      | Base Price | Occupied |\n");
+    // printf("----------------------------------------------------------------------------------------\n");
+
+    // Print headers in file akbar printf kora lagbe
+    fprintf(file, "\n\n\n------------------------------------------------------------------------------------------\n");
+    fprintf(file, "| Room Number  | Floor | Type      | View         | AC Type      | Base Price | Occupied |\n");
+    fprintf(file, "------------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < roomCount; i++)
+    {
+        if (hotelRooms[i].roomNumber <= 0)
+        {
+            printf("Error: Incomplete room data at index %d.\n", i);
+            continue;
+        }
+
+        // Print room data for console debuger jono
+        // printf("| %-12d | %-5d | %-9s | %-9s | %-12s | %-10d | %-8s |\n",
+        //        hotelRooms[i].roomNumber, hotelRooms[i].floor, hotelRooms[i].type,
+        //        hotelRooms[i].view, hotelRooms[i].ac_type,
+        //        hotelRooms[i].basePrice, hotelRooms[i].isOccupied ? "Yes" : "No");
+
+        // Print room data to file in human er jono
+        fprintf(file, "| %-12d | %-5d | %-9s | %-12s | %-12s | %-10d | %-8s |\n",
+                hotelRooms[i].roomNumber, hotelRooms[i].floor, hotelRooms[i].type,
+                hotelRooms[i].view, hotelRooms[i].ac_type,
+                hotelRooms[i].basePrice, hotelRooms[i].isOccupied ? "Yes" : "No");
+    }
+
+    fclose(file);
+    printf("----------------------------------------------------------------------------------------\n");
+    printf("Room details saved and displayed successfully.\n");
 }
 
-int calculatePrice(Room *room, int stayDuration, int month)
+void display_Room_Details_data()
 {
-    int price = room->basePrice;
-
-    if (isPeakSeason(month))
+    FILE *file = fopen("Room_details.txt", "r");
+    if (file == NULL)
     {
-        price *= 1.2;
+        printf("Error: Could not open file for reading.\n");
+        return;
     }
 
-    if (stayDuration > 7)
+    char line[256];
+    // printf("----------------------------------------------------------------------------------------\n");
+    // printf("| Room Number  | Floor | Type      | View      | AC Type      | Base Price | Occupied |\n");
+    // printf("----------------------------------------------------------------------------------------\n");
+
+    // line diya full 1 block array access
+    fgets(line, sizeof(line), file);
+
+    // Read and print the rest of the lines
+    while (fgets(line, sizeof(line), file))
     {
-        price *= 0.85;
-    }
-    else if (stayDuration < 3)
-    {
-        price *= 1.15;
+        printf("%s", line); // Print the line as is
     }
 
-    //if (strcmp(room->view, "Sea View") == 0)
-    //{
-    //    price *= 1.2;
-    //}
-
-    return price * stayDuration;
+    fclose(file);
 }
 
-int isPeakSeason(int month)
+void save_book_users_data()
 {
-    // peak season months ->June (6), July (7), November (11), December (12)
-    if (month == 6 || month == 7 || month == 11 || month == 12)
+    FILE *file = fopen("Booked_users.txt", "a");
+    if (file == NULL)
     {
-        return 1;
-    }
-    return 0;
-}
-
-// By sAhAf🙂
-
-// By TeaM ScorPIoN🙂
-void saveAndDisplayBookedUsers() {
-    FILE *file = fopen("booked_users.txt", "a");
-    if (file == NULL) {
         printf("Error: Could not open file for saving booked users.\n");
         return;
     }
@@ -700,20 +694,23 @@ void saveAndDisplayBookedUsers() {
     // printf("------------------------------------------------------------\n");
     // printf("| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
 
-    if (userCount == 0) {  // Replace 'userCount' with your counter variable
+    if (userCount == 0)
+    {
         printf("No users have booked rooms.\n");
-        fprintf(file, "No users have booked rooms.\n");
+        // fprintf(file, "No users have booked rooms.\n");
         fclose(file);
         return;
     }
 
-    for (int i = 0; i < userCount; i++) {  // Replace 'userCount' with your counter variable
-        if (c[i].name == NULL || c[i].roomNumber <= 0) {  // Replace 'c' with your array name
+    for (int i = 0; i < userCount; i++)
+    {
+        if (c[i].name == NULL || c[i].roomNumber <= 0)
+        {
             printf("Error: Incomplete user data at index %d.\n", i);
             continue;
         }
 
-        fprintf(file, "| %-17s | %-15s | %-20s | %-15s | %-10s | %-10s | %-12d | %-15s | %-15s |\n",
+        fprintf(file, "| %-17s | %-15s | %-26s | %-15s | %-10s | %-10s | %-12d | %-15s | %-15s |\n",
                 c[i].name, c[i].phoneNumber, c[i].email,
                 c[i].address, c[i].idType, c[i].idNumber,
                 c[i].roomNumber, c[i].checkInDate, c[i].checkOutDate);
@@ -728,157 +725,72 @@ void saveAndDisplayBookedUsers() {
     printf("Booked Users saved and displayed successfully.\n");
 }
 
-
-void displaySavedUsers() {
-    FILE *file = fopen("booked_users.txt", "r");
-    if (file == NULL) {
+void display_book_users_data()
+{
+    FILE *file = fopen("Booked_users.txt", "r");
+    if (file == NULL)
+    {
         printf("Error: Could not open file for reading.\n");
         return;
     }
 
     char line[256];
-    printf("------------------------------------------------------------\n");
-    printf("| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
-    printf("------------------------------------------------------------\n");
+    printf("|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n");
+    printf("| Name              | Phone Number   | Email                     | Address                    | ID Type    | ID Number     | Room Number   | Check-in Date   | Check-out Date  |\n");
+    // printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
-    // Skip the header line
+    // line diya full 1 block array access
     fgets(line, sizeof(line), file);
 
     // Read and print the rest of the lines
-    while (fgets(line, sizeof(line), file)) {
-        printf("%s", line);  // Print the line as is
+    while (fgets(line, sizeof(line), file))
+    {
+        printf("%s", line); // Print the line as is
     }
 
     fclose(file);
 }
 
-
-/*
-void saveAndDisplayBookedUsers()
+void print_bill(int i)
 {
-    FILE *f;
-    f = fopen("booked_users.txt", "w");
-    if (f == NULL)
-    {
-        printf("Error opening file!\n");
-        return;
-    }
+    FILE *file = fopen("Print Bill.txt", "w");
+    // Write the invoice data to the file
+    fprintf(file, "Hotel %s\n", HOTEL_NAME);
+    fprintf(file, "Address: %s\n", HOTEL_ADDRESS);
+    fprintf(file, "Phone: %s\n", HOTEL_PHONE);
+    fprintf(file, "Email: %s\n\n", HOTEL_EMAIL);
 
-    fprintf(f, "Name, Phone Number, Email, Address, ID Type, ID Number, Room Number, Stay Duration, Check-in Date, Check-out Date\n");
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "              Guest Invoice\n");
+    fprintf(file, "-------------------------------------\n\n");
 
-    printf("Booked Users:\n");
-    printf("------------------------------------------------------------\n");
-    printf("| %-17s | %-15s | %-20s | %-15s | %-10s | %-10s | %-11s | %-13s | %-13s |\n",
-           "Name", "Phone Number", "Email", "Address", "ID Type", "ID Number", "Room Number", "Check-in Date", "Check-out Date");
+    fprintf(file, "Guest Name: %s\n", c[i].name);
+    fprintf(file, "Phone Number: %s\n", c[i].phoneNumber);
+    fprintf(file, "Email: %s\n", c[i].email);
+    fprintf(file, "Address: %s\n", c[i].address);
+    fprintf(file, "Room Number: %d\n\n", c[i].roomNumber);
 
-    for (int i = 0; i < max_user; i++)
-    {
-        if (c[i].roomNumber != 0)
-        { // Checking if the user has booked a room
-            fprintf(f, "%s, %s, %s, %s, %s, %s, %d, %d, %s, %s\n",
-                    c[i].name,
-                    c[i].phoneNumber,
-                    c[i].email,
-                    c[i].address,
-                    c[i].idType,
-                    c[i].idNumber,
-                    c[i].roomNumber,
-                    c[i].stayDuration,
-                    c[i].checkInDate,
-                    c[i].checkOutDate);
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Description           Rate (per night)  Nights Stayed  Amount (BDT)\n");
+    fprintf(file, "Room Rent (Standard)  3,000             4              %d\n", c[i].base_price);
+    fprintf(file, "Service Charge (5%)                                        600\n");
+    fprintf(file, "VAT (10%)                                                1,260\n");
+    fprintf(file, "Additional Charges                                       0\n");
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Total Amount (BDT):                                     %d\n\n", c[i].total_price);
 
-            // Displaying on console
-            printf("| %-17s | %-15s | %-20s | %-15s | %-10s | %-10s | %-11d | %-13s | %-13s |\n",
-                   c[i].name,
-                   c[i].phoneNumber,
-                   c[i].name,
-                   c[i].phoneNumber,
-                   c[i].email,
-                   c[i].address,
-                   c[i].idType,
-                   c[i].idNumber,
-                   c[i].roomNumber,
-                   c[i].stayDuration,
-                   c[i].checkInDate,
-                   c[i].checkOutDate);
-        }
-    }
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Check-in Date: %s\n", c[i].checkInDate);
+    fprintf(file, "Check-out Date: %s\n", c[i].checkOutDate);
+    fprintf(file, "Payment Method: Cash/Card\n\n");
 
-    fclose(f);
-    printf("User data saved to file and displayed successfully!\n");
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Thank you for staying with us!\n");
+    fprintf(file, "We look forward to welcoming you again.\n");
+    fprintf(file, "-------------------------------------\n");
+    fclose(file);
 }
-*/
-// void savefile_user()
-// {
-//     FILE *f2;
-//     f2 = fopen("User.txt", "a"); // Use "a" mode to append data
-//     if (f2 == NULL)
-//     {
-//         printf("Error opening file!\n");
-//         return;
-//     }
 
-//     int userCount = 0;
-//     for (int i = 0; i < max_user; i++)
-//     {
-//         if (c[i].roomNumber != 0) // Only count customers with a booked room
-//         {
-//             userCount++;
-//         }
-//     }
+// By sAhAf🙂
 
-//     // Write the number of users (Only if there's any booking)
-//     if (userCount > 0)
-//     {
-//         fwrite(&userCount, sizeof(int), 1, f2);
-
-//         // Write only the users with valid bookings
-//         for (int i = 0; i < max_user; i++)
-//         {
-//             if (c[i].roomNumber != 0) // Only save customers with a booked room
-//             {
-//                 fwrite(&c[i], sizeof(customer), 1, f2);
-//             }
-//         }
-//     }
-
-//     fclose(f2);
-
-//     // Read and print customer booking data
-//     f2 = fopen("User.txt", "r"); // Open the file again in read mode
-//     if (f2 == NULL)
-//     {
-//         printf("Error opening file for reading!\n");
-//         return;
-//     }
-
-//     // Read the number of users
-//     fread(&userCount, sizeof(int), 1, f2);
-
-//     printf("\n--- Customer Booking Data ---\n");
-//     printf("-------------------------------------------------------------\n");
-//     printf("| Name             | Phone Number   | Room Number | Check-in Date  |\n");
-//     printf("-------------------------------------------------------------\n");
-
-//     customer temp;
-//     for (int i = 0; i < userCount; i++)
-//     {
-//         fread(&c, sizeof(customer), 1, f2);
-
-//         printf("| %-17s | %-15s | %-11d | %-15s |\n",
-//                c[i].name, c[i].phoneNumber, c[i].roomNumber, c[i].checkInDate);
-//     }
-
-//     printf("-------------------------------------------------------------\n");
-
-//     fclose(f2);
-// }
-
-// // void book_room(char hotel[ROOMS][20], int room) {
-// //     if (strcmp(hotel[room], "Available") == 0) {
-// //         strcpy(hotel[room], "Booked");
-// //         printf("Room %d has been booked successfully!\n", room + 1);
-// //     } else {
-// //         printf("Room %d is already booked.\n", room + 1);
-// //     }
-// // }
+// By TeaM ScorPIoN🙂
