@@ -17,7 +17,7 @@ void print_bill(int i)
     fprintf(file, "Address: %s\n", c[i].address);
     fprintf(file, "Room Number: %d\n\n", c[i].roomNumber);
 
-    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "-------------------------------------\n");// By sAhAf🙂
     fprintf(file, "Description           Rate (per night)  Nights Stayed  Amount (BDT)\n");
     fprintf(file, "Room Rent (Standard)  3,000             4              %d\n", c[i].base_price);
     fprintf(file, "Service Charge (5%)                                        600\n");
