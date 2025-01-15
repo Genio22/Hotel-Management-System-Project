@@ -108,6 +108,7 @@ void book_room()
                 if (c[j].roomNumber == 0)
                 {
                     // printf("%d", j);
+                    // By sAhAf🙂
                     printf("Name: ");
                     scanf("%[^\n]s", c[j].name);
                     getchar();
