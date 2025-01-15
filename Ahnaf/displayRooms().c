@@ -15,7 +15,7 @@ void displayRooms()
                hotelRooms[i].ac_type,
                hotelRooms[i].isOccupied ? "Yes" : "No",
                hotelRooms[i].basePrice);
-    }
+    }// By sAhAf🙂
 
     printf("----------------------------------------------------------------------------------\n");
 }
