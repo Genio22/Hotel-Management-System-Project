@@ -1,152 +1,145 @@
-# Hotel Management System (C Program)
+# Hotel Management System Project
 
-A simple Hotel Management System written in C that allows users (guests) to book rooms, view available rooms, and admins to add new rooms. The system includes features for calculating pricing based on seasonal adjustments, stay duration, and room view.
+## Project Overview
+This project is a Hotel Management System written in C. It manages hotel rooms, bookings, check-ins, check-outs, and generates invoices. The system includes separate functionalities for admins and users, ensuring efficient hotel management.
 
 ## Features
+### Admin Functionalities:
+- Add new rooms
+- Display available rooms
+- Book rooms for customers
+- Check out customers
+- Save and display room details
+- Save and display booked users' data
+- Generate and print invoices
 
-- **User Login**: Supports both guest and admin login with a simple username and password check for admin users.
-- **Room Management**: Admins can add new rooms to the system.
-- **Booking System**: Guests can book rooms based on type, floor, and view. Room prices are dynamically calculated based on the length of stay and season.
-- **Pricing Calculation**: Includes adjustments for peak season, stay duration, and room view (Sea View or City View).
-- **Bill Breakdown**: Displays a detailed breakdown of the total cost for the guest's stay.
+### User Functionalities:
+- Display available rooms
+- Book rooms
 
-## System Design
-
-### Constants
-- **MAX_ROOMS**: Maximum number of rooms (40 rooms).
-- **MAX_FLOORS**: Maximum number of floors (10 floors).
-- **MAX_LOGIN_ATTEMPTS**: Maximum failed login attempts (3).
-- **PEAK_SEASON_START**: Start month of peak season (December).
-- **PEAK_SEASON_END**: End month of peak season (February).
-
-### Room Structure
-Each room is represented by the following attributes:
-- `roomNumber`: Unique identifier for the room.
-- `type`: Room type (Single or Double).
-- `floor`: Floor number (1-10).
-- `isOccupied`: Indicates whether the room is booked or available (0 for available, 1 for occupied).
-- `view`: Room view (Sea View or City View).
-- `customerName`: Name of the guest who booked the room.
-- `stayDuration`: Duration of the stay in days.
-- `basePrice`: Base price of the room before any adjustments.
-
-## Functionality
-
-### 1. **Login System**
-   - **Guest Login**: Guests can log in to book rooms.
-   - **Admin Login**: Admins can log in to add new rooms. The admin login requires a username and password.
-
-### 2. **Room Booking**
-   Guests can book rooms by:
-   - Selecting room type (Single or Double).
-   - Narrowing down by floor and view.
-   - Confirming booking and providing customer details (name and stay duration).
-
-### 3. **Room Management**
-   Admins can add new rooms by specifying:
-   - Room number.
-   - Room type (Single/Double).
-   - Floor number.
-   - View (Sea View/City View).
-   - Base price.
-
-### 4. **Price Calculation**
-   Room prices are calculated based on:
-   - **Peak Season**: Prices increase by 20% during peak season (December to February).
-   - **Stay Duration**: Discount for stays longer than 7 days, surcharge for stays shorter than 3 days.
-   - **View Premium**: Sea View rooms are 20% more expensive.
-
-### 5. **Bill Breakdown**
-   The system provides a detailed breakdown of the total price, including:
-   - Base price per night.
-   - Seasonal surcharge (if applicable).
-   - Stay duration adjustment (discount or surcharge).
-   - Sea View premium (if applicable).
-
-## Code Structure
-
-### Main Functions:
-- **initializeRooms()**: Initializes default room data (40 rooms).
-- **login()**: Handles user login for both guests and admins.
-- **addRoom()**: Allows the admin to add a new room.
-- **bookRoom()**: Allows guests to book available rooms.
-- **displayRooms()**: Displays all available and occupied rooms.
-- **isPeakSeason()**: Checks if the current month falls within the peak season.
-- **calculatePrice()**: Calculates the price based on room type, view, stay duration, and season.
-- **printBillBreakdown()**: Prints the detailed bill breakdown for the guest.
-
-### Global Variables:
-- **hotelRooms[MAX_ROOMS]**: Array to store room data.
-- **roomCount**: Tracks the current number of rooms in the system.
-
-## How to Run the Program
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yourusername/hotel-management-system.git
-   ```
-
-2. **Navigate to the Project Directory**
-   ```bash
-   cd hotel-management-system
-   ```
-
-3. **Compile the Program**
-   Use a C compiler (like `gcc`) to compile the program:
-   ```bash
-   gcc -o hotel_management_system hotel_management_system.c
-   ```
-
-4. **Run the Program**
-   Execute the compiled program:
-   ```bash
-   ./hotel_management_system
-   ```
-
-## Example Output
-
-**Login**:
+## File Structure
 ```
-Welcome to the Hotel Booking System!
-Please enter today's date (DD MM YYYY): 23 12 2024
-Today's Date: 23-12-2024
-Are you a Guest or Admin?
-1. Guest
-2. Admin
-Enter your choice: 1
-You are logged in as a Guest.
+Hotel-Management-System-Project/
+│
+├── Ahnaf/
+│   └── janina/
+│       └── jani_na.c
+│
+├── README.md
+└── (Other directories and files)
 ```
 
-**Booking**:
+## Compilation and Execution Instructions
+1. **Clone the repository**:
+    ```sh
+    git clone https://github.com/Genio22/Hotel-Management-System-Project.git
+    cd Hotel-Management-System-Project/Ahnaf/janina
+    ```
+
+2. **Compile the program**:
+    ```sh
+    gcc jani_na.c -o hotel_management
+    ```
+
+3. **Run the executable**:
+    ```sh
+    ./hotel_management
+    ```
+
+## Detailed Description
+### Global Constants
+- `HOTEL_NAME`: The name of the hotel.
+- `HOTEL_ADDRESS`: The address of the hotel.
+- `HOTEL_PHONE`: The phone number of the hotel.
+- `HOTEL_EMAIL`: The email address of the hotel.
+- `MAX_ROOMS`: Maximum number of rooms in the hotel.
+- `MAX_FLOORS`: Maximum number of floors in the hotel.
+- `max_user`: Maximum number of users.
+- `ADMIN_USERNAME`: Default admin username.
+- `ADMIN_PASSWORD`: Default admin password.
+- `USER_PASSWORD`: Default user password.
+
+### Structures
+- **Room**: Contains details about each room such as room number, floor, type, view, AC type, base price, and occupancy status.
+- **Customer**: Contains customer details such as name, phone number, email, address, ID type, ID number, room number, total price, base price, stay duration, check-in, and check-out dates.
+
+### Functions
+- **Initialization and Utility Functions**:
+  - `print_logo()`: Prints the hotel logo.
+  - `initializeRooms()`: Initializes the hotel rooms with predefined types, views, AC types, and base prices.
+  - `displayRooms()`: Displays all rooms and their details.
+  - `AddRoom()`: Adds a new room to the hotel.
+- **Login and Menu Functions**:
+  - `login(const char *username, const char *password)`: Handles login for admin and users.
+  - `showAdminMenu()`: Displays the admin menu.
+  - `showUserMenu()`: Displays the user menu.
+- **Room Booking and Checkout Functions**:
+  - `book_room()`: Books a room based on user preferences such as room type, AC type, and view.
+  - `calculatePrice(Room *room, int stayDuration, int month)`: Calculates the total price for the stay, considering peak season and stay duration discounts.
+  - `isPeakSeason(int month)`: Checks if the given month is a peak season.
+  - `checkout()`: Handles the checkout process for a room.
+- **File Handling Functions**:
+  - `save_book_users_data()`: Saves booked user data to a file.
+  - `display_book_users_data()`: Displays booked user data from a file.
+  - `save_Room_Details_data()`: Saves room details to a file.
+  - `display_Room_Details_data()`: Displays room details from a file.
+  - `print_bill(int i)`: Prints the bill for a customer.
+
+## How to Use
+### Admin Steps
+1. **Login as Admin**:
+    - Username: `admin`
+    - Password: `admin123`
+2. **Admin Menu**:
+    - Display available rooms
+    - Add a new room
+    - Book a room
+    - Checkout a customer
+    - Save and display room details
+    - Save and display booked users' data
+    - Generate and print invoices
+
+### User Steps
+1. **User Menu**:
+    - Display available rooms
+    - Book a room
+
+## Example Usage
+### Hotel Logo
 ```
-Enter room type (Single/Double): Single
-Available rooms of type Single:
-Room Number: 101, Floor: 1, View: Sea View
-Room Number: 103, Floor: 1, View: City View
-...
-Enter floor number to narrow down: 1
-Available rooms on floor 1:
-Room Number: 101, View: Sea View
-Enter room number to select: 101
-You have selected:
-Room Number: 101, Type: Single, Floor: 1, View: Sea View
-Confirm booking? (1 for Yes, 0 for No): 1
-Enter your name: John Doe
-Enter stay duration (in days): 5
-...
-Total Charges for 5 nights: $900
+                                  (                               
+   (                   )     (    )\ )        )                )  
+   )\          )    ( /(   ) )\  (()\/  (  ( /((     (    ) ( /(  
+ (((_)  (   ( /( (  )\()| /(((_)  /(_))))\ )\())(   ))\( /( )\()) 
+ )\___  )\  )(_)))\(_))/)(_))_   (_)) /((_|_))(()\ /((_)(_)|_))/  
+((/ __|((_)((_)_((_) |_((_)_| |  | _ (_)) | |_ ((_|_))((_)_| |_   
+ | (__/ _ \/ _` (_-<  _/ _` | |  |   / -_)|  _| '_/ -_) _` |  _|  
+  \___\___/\__,_/__/\__\__,_|_|  |_|_\___| \__|_| \___\__,_|\__|  
+                                                                  
+                                                        by Team Scorpion
 ```
 
-## Contributing
+### Admin Menu
+```
+********************************************
+*        Welcome to HOTEL Paradise         *
+********************************************
+*  1. Display Available Rooms              *
+*  2. Add a Room                           *
+*  3. Room Booking                         *
+*  4. Checkout                             *
+*  5. Exit                                 *
+********************************************
+Enter your choice: 
+```
 
-Contributions are welcome! Current contributors include:
-- **Riad Mahmud**
-- **Ahnaf Sahaf**
-- **Syeda Raisa Tahsin**
-- **Al Ameen**
-
-Feel free to fork this repository, make changes, and submit pull requests. If you find any issues or have suggestions, please open an issue.
+## Contributors
+We all are together **Team Scorpion**:
+- Ahnaf
+- Al Amin
+- Riad
+- Tahsin
 
 ## License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-This project is licensed under the license from East West University (EWU), Dhaka. For more details, see the LICENSE file.
