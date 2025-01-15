@@ -392,7 +392,7 @@ void edit_Room()
                    roomNumber, floor, type, view, basePrice, isOccupied);
             edit = 1;
         }
-        
+
     }
     if(!edit)
         {
@@ -429,6 +429,7 @@ void book_room()
     int foundroom[MAX_ROOMS];
     int foundcount = 0;
     int room_found = 0, stayDuration, month;
+
 
     printf("Enter the room type (single/double): ");
     scanf("%[^\n]s", type);
@@ -536,6 +537,7 @@ void book_room()
                     printf("Name: ");
                     scanf("%[^\n]s", c[j].name);
                     getchar();
+
                     printf("Phone Number: ");
                     scanf("%[^\n]s", c[j].phoneNumber);
                     getchar();
@@ -805,7 +807,9 @@ void display_book_users_data()
 
 void print_bill(int i)
 {
-    FILE *file = fopen("Print Bill.txt", "w");
+    char f[30];
+    sprintf(f, "Print Bill %d.txt", userCount);
+    FILE *file = fopen(f, "w");
     // Write the invoice data to the file
     fprintf(file, "Hotel %s\n", HOTEL_NAME);
     fprintf(file, "Address: %s\n", HOTEL_ADDRESS);
