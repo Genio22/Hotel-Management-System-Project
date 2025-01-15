@@ -203,7 +203,6 @@ int main()
             {
                 printf("Access denied. Only Admin can perform checkout.\n");
             }
-            display_book_users_data();
             break;
         case 7:// Exit
             printf("Exiting the system. Goodbye!\n");
@@ -586,7 +585,7 @@ void book_room()
                     c[j].roomNumber = roomNumber;
                     c[j].base_price = hotelRooms[idx].basePrice;
                     c[j].total_price = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
-
+                    hotelRooms[foundroom[i]].isOccupied = 1;
                     // printf("Mr/Ms %s. You room %d have successfully been booked! \nTotal price for %d days is: %d\n",
                     //        c[j].name, roomNumber, stayDuration, totalPrice);
                     printf("\n\n\n");
