@@ -18,6 +18,7 @@ int calculatePrice(Room *room, int stayDuration, int month)
 
     // if (strcmp(room->view, "Sea View") == 0)
     //{
+    // By sAhAf🙂
     //     price *= 1.2;
     // }
 
