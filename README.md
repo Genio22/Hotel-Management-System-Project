@@ -105,7 +105,7 @@ Hotel-Management-System-Project/
     - Book a room
 
 ## Example Usage
-### Hotel Logo
+### Program Logo
 ```
                                   (                               
    (                   )     (    )\ )        )                )  
