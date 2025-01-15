@@ -18,7 +18,7 @@ void display_book_users_data()
     // Read and print the rest of the lines
     while (fgets(line, sizeof(line), file))
     {
-        printf("%s", line); // Print the line as is
+        printf("%s", line); // Print the line as is // By sAhAf🙂
     }
 
     fclose(file);
