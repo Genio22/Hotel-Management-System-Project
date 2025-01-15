@@ -19,5 +19,4 @@ void checkout()
             break;
         }
     }
-}
-// By sAhAf🙂
+} // By sAhAf🙂
