@@ -2,15 +2,15 @@ void initializeRooms()
 {
     int roomNumber = 1;
     char *type[] = {"single", "double", "deluxe"};
-    char *view[] = {"Sea View", "City View"};
-    char *ac_type[] = {"AC Room", "Non AC Room"};
+    char *view[] = {"sea view", "city view"};
+    char *ac_type[] = {"ac", "non ac"};
     int basePrice[] = {1350, 1200, 1000, 1500};
     int basePrice1[] = {3000, 5000};
     for (int floor = 1; floor <= MAX_FLOORS; floor++) // total floor in building
     {
-        for (int i = 0; i < (MAX_ROOMS / MAX_FLOORS); i++) // akta floor e 4 ta room
+        for (int i = 1; i < 5; i++) // akta floor e 4 ta room
         {
-            hotelRooms[roomCount].roomNumber = (floor * 100) + (i + 1); // one kore room number bariteche // new fix room number by floor
+            hotelRooms[roomCount].roomNumber = (floor * 100) + i; // one kore room number bariteche // new fix room number by floor
 
             hotelRooms[roomCount].floor = floor; // for each iteration floor remain same
             // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter // By sAhAf🙂
