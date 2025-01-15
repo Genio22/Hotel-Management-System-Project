@@ -9,7 +9,7 @@ void display_Room_Details_data()
 
     char line[256];
     // printf("----------------------------------------------------------------------------------------\n");
-    // printf("| Room Number  | Floor | Type      | View      | AC Type      | Base Price | Occupied |\n");
+    // printf("| Room Number  | Floor | Type      | View      | AC Type      | Base Price | Occupied |\n"); // By sAhAf🙂
     // printf("----------------------------------------------------------------------------------------\n");
 
     // line diya full 1 block array access
