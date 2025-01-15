@@ -357,9 +357,10 @@ void AddRoom()
     }
     else
     {
-        printf("Sorry, no more room available!We are Fully booked! Please check back later.\n");
+        printf("Sorry, Can not add more room ! Please try later.\n");
     }
 }
+
 
 
 void edit_Room()
