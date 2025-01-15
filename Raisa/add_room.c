@@ -2,7 +2,7 @@
 void AddRoom()
 {
     int roomNumber, floor, basePrice, isOccupied;
-    char type[20], view[20], ac_type[20];
+    char type[20], view[20];
 
     if (roomCount < MAX_ROOMS) // Ensure roomCount is less than MAX_ROOMS
     {
@@ -11,12 +11,13 @@ void AddRoom()
         scanf("%d", &roomNumber);
         printf("Enter Floor: ");
         scanf("%d", &floor);
+        getchar();
         printf("Enter Room Type (e.g., Single, Double): ");
-        scanf("%s", type);
+        scanf("%[^\n]s", type);
+        getchar();
         printf("Enter View (e.g., Sea, City): ");
-        scanf("%s", view);
-        printf("Enter AC type (e.g., AC, Non AC): ");
-        scanf("%s", ac_type);
+        scanf("%[^\n]s", view);
+        getchar();
         printf("Enter Base Price: ");
         scanf("%d", &basePrice);
         printf("Is the room occupied? (1 for Yes, 0 for No): ");
@@ -29,15 +30,14 @@ void AddRoom()
         hotelRooms[roomCount].isOccupied = isOccupied;
         strcpy(hotelRooms[roomCount].type, type);
         strcpy(hotelRooms[roomCount].view, view);
-        strcpy(hotelRooms[roomCount].ac_type, ac_type);
 
         roomCount++;
-        printf("\n\n  ---- Room added successfully.------\n");
-        printf("Room Number: %d\nFloor: %d\nRoom Type: %s\nView: %s\nAC Type: %s\nBase Price: %d\nOccupied: %d\n",
-               roomNumber, floor, type, view, ac_type, basePrice, isOccupied);
+        printf("\n\n  ------ Room added successfully.------  \n");
+        printf("Room Number: %d\nFloor: %d\nRoom Type: %s\nView: %s\nBase Price: %d\nOccupied: %d\n",
+               roomNumber, floor, type, view, basePrice, isOccupied);
     }
     else
     {
-        printf("Sorry, no more room available!We are Fully booked! Please check back later.\n");
+        printf("Cannot add more rooms. Maximum capacity reached.\n");
     }
 }
