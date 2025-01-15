@@ -242,7 +242,7 @@ void print_logo()
 // By sAhAf🙂
 
 // admin and user login interfage
-int login(const char *username, const char *password)
+int login(char *username, char *password)
 {
     char inputUsername[20], inputPassword[20];
 
