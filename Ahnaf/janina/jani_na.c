@@ -13,7 +13,7 @@
 #define ADMIN_USERNAME "admin"
 #define ADMIN_PASSWORD "admin123"
 // #define USER_USERNAME ""
-#define USER_PASSWORD "user123"
+// #define USER_PASSWORD "user123"
 
 // Room structure
 typedef struct
@@ -30,7 +30,6 @@ typedef struct
 typedef struct
 {
     char name[50];
-    // char lastName[50];
     char phoneNumber[15];
     char email[50];
     char address[100];
@@ -81,7 +80,7 @@ void print_bill(int i);
 
 int main()
 {
-    int choice = 0;
+    int choice = 0, a = 0;
 
     print_logo();
     printf("\n\nWelcome to the Hotel %s\n", HOTEL_NAME);
@@ -201,7 +200,10 @@ int main()
             display_Room_Details_data();
             break;
         case 8:
-            print_bill(0);
+
+            printf("Enter the index for student: ");
+            scanf("%d", &a);
+            print_bill(a);
             break;
         default: // Invalid input
             printf("Invalid choice. Please try again.\n");
@@ -368,7 +370,7 @@ void displayRooms()
                hotelRooms[i].ac_type,
                hotelRooms[i].isOccupied ? "Yes" : "No",
                hotelRooms[i].basePrice);
-    }// By sAhAf🙂
+    } // By sAhAf🙂
 
     printf("----------------------------------------------------------------------------------\n");
 }
@@ -567,7 +569,7 @@ int calculatePrice(Room *room, int stayDuration, int month)
     // }
 
     return price * stayDuration;
-}// By sAhAf🙂
+} // By sAhAf🙂
 
 int isPeakSeason(int month)
 {
@@ -577,7 +579,7 @@ int isPeakSeason(int month)
         return 1;
     }
     return 0;
-}// By sAhAf🙂
+} // By sAhAf🙂
 
 void checkout()
 {
@@ -600,7 +602,7 @@ void checkout()
             break;
         }
     }
-}// By sAhAf🙂
+} // By sAhAf🙂
 
 void save_Room_Details_data()
 {
