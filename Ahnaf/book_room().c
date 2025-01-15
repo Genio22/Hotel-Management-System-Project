@@ -112,6 +112,7 @@ void book_room()
                     printf("Name: ");
                     scanf("%[^\n]s", c[j].name);
                     getchar();
+
                     printf("Phone Number: ");
                     scanf("%[^\n]s", c[j].phoneNumber);
                     getchar();
@@ -142,7 +143,7 @@ void book_room()
                     c[j].roomNumber = roomNumber;
                     c[j].base_price = hotelRooms[idx].basePrice;
                     c[j].total_price = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
-                    hotelRooms[foundroom[i]].isOccupied = 1;
+
                     // printf("Mr/Ms %s. You room %d have successfully been booked! \nTotal price for %d days is: %d\n",
                     //        c[j].name, roomNumber, stayDuration, totalPrice);
                     printf("\n\n\n");
