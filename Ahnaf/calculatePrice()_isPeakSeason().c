@@ -18,12 +18,11 @@ int calculatePrice(Room *room, int stayDuration, int month)
 
     // if (strcmp(room->view, "Sea View") == 0)
     //{
-    // By sAhAf🙂
     //     price *= 1.2;
     // }
 
     return price * stayDuration;
-}
+} // By sAhAf🙂
 
 int isPeakSeason(int month)
 {
@@ -33,4 +32,4 @@ int isPeakSeason(int month)
         return 1;
     }
     return 0;
-}
+} // By sAhAf🙂
