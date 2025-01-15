@@ -30,5 +30,5 @@ void initializeRooms()
             roomCount++;
         }
     }
-    printf("Default rooms initialized!\n");
+    // printf("Default rooms initialized!\n");
 }
