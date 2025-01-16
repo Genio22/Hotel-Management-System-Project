@@ -54,7 +54,7 @@ int roomCount = 0, userCount = 0;
 void print_logo();
 
 // Login and it menu type
-int login(const char *username, const char *password);
+int login(char *username, char *password);
 void showAdminMenu();
 void showUserMenu();
 
