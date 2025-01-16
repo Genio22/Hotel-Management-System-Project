@@ -14,7 +14,7 @@ void initializeRooms()
             hotelRooms[roomCount].roomNumber = (floor * 100) + i; // one kore room number bariteche // new fix room number by floor
 
             hotelRooms[roomCount].floor = floor; // for each iteration floor remain same
-            // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter // By sAhAf🙂
+            // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter 
             strcpy(hotelRooms[roomCount].type, type[rand() % 3]);
             strcpy(hotelRooms[roomCount].view, view[rand() % 2]);
             strcpy(hotelRooms[roomCount].ac_type, ac_type[rand() % 2]);
