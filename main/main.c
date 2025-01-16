@@ -239,7 +239,7 @@ void print_logo()
     printf("  \\___\\___/\\__,_/__/\\__\\__,_|_|  |_|_\\___| \\__|_| \\___\\__,_|\\__|  \n");
     printf("                                                                  by Team Scorpion");
 }
-// By sAhAf🙂
+
 
 // admin and user login interfage
 int login(char *username, char *password)
@@ -305,7 +305,7 @@ void initializeRooms()
             hotelRooms[roomCount].roomNumber = (floor * 100) + i; // one kore room number bariteche // new fix room number by floor
 
             hotelRooms[roomCount].floor = floor; // for each iteration floor remain same
-            // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter // By sAhAf🙂
+            // (rand() % 2 == 0)                      // amni akt logic to get value for other parameter 
             strcpy(hotelRooms[roomCount].type, type[rand() % 3]);
             strcpy(hotelRooms[roomCount].view, view[rand() % 2]);
             strcpy(hotelRooms[roomCount].ac_type, ac_type[rand() % 2]);
@@ -325,7 +325,6 @@ void initializeRooms()
     // printf("Default rooms initialized!\n");
 }
 
-// done by tahsin
 void AddRoom()
 {
     int roomNumber, floor, basePrice, isOccupied;
@@ -435,7 +434,7 @@ void displayRooms()
                hotelRooms[i].ac_type,
                hotelRooms[i].isOccupied ? "Yes" : "No",
                hotelRooms[i].basePrice);
-    } // By sAhAf🙂
+    } 
 
     printf("----------------------------------------------------------------------------------\n");
 }
@@ -550,7 +549,7 @@ void book_room()
                 if (c[j].roomNumber == 0)
                 {
                     // printf("%d", j);
-                    // By sAhAf🙂
+                    
                     printf("Name: ");
                     scanf("%[^\n]s", c[j].name);
                     getchar();
@@ -645,7 +644,7 @@ int isPeakSeason(int month)
         return 1;
     }
     return 0;
-} // By sAhAf🙂
+} 
 
 void editBookingDetails()
 {
@@ -727,7 +726,7 @@ void checkout()
             break;
         }
     }
-} // By sAhAf🙂
+}
 
 void save_Room_Details_data()
 {
@@ -822,7 +821,7 @@ void save_book_users_data()
 
     // printf("------------------------------------------------------------\n");
     // printf("| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
-    // By sAhAf🙂
+    
 
     if (userCount == 0)
     {
@@ -875,7 +874,7 @@ void display_book_users_data()
     // Read and print the rest of the lines
     while (fgets(line, sizeof(line), file))
     {
-        printf("%s", line); // Print the line as is // By sAhAf🙂
+        printf("%s", line); // Print the line as is
     }
 
     fclose(file);
@@ -923,6 +922,5 @@ void print_bill(int i)
     fclose(file);
 }
 
-// By sAhAf🙂
 
 // By TeaM ScorPIoN🙂
