@@ -99,10 +99,10 @@ We welcome contributions to enhance the functionality and user experience of Coa
 
 ## Team Members
 This project was developed by **Team Scorpion**:
-- **SaHAF** (Lead Developer):
+- **SaHAF** (Lead Developer)
 - **Riad**
 - **Tahsin**
-- **Al Ameen**
+- **Al Ameen** (lead Designer)
 
 ## License
 This project is licensed under the MIT License. You are free to use, modify, and distribute this software in accordance with the terms of the license.
