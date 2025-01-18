@@ -1,0 +1,46 @@
+
+
+
+------------------------------------------------------------------------------------------
+| Room Number  | Floor | Type      | View         | AC Type      | Base Price | Occupied |
+------------------------------------------------------------------------------------------
+| 101          | 1     | deluxe    | city view    | ac           | 3000       | No       |
+| 102          | 1     | deluxe    | sea view     | ac           | 3000       | No       |
+| 103          | 1     | double    | sea view     | non ac       | 1200       | No       |
+| 104          | 1     | double    | city view    | non ac       | 1500       | No       |
+| 201          | 2     | double    | sea view     | non ac       | 1350       | No       |
+| 202          | 2     | single    | sea view     | ac           | 1200       | No       |
+| 203          | 2     | double    | sea view     | non ac       | 1350       | No       |
+| 204          | 2     | deluxe    | city view    | non ac       | 3000       | No       |
+| 301          | 3     | deluxe    | sea view     | non ac       | 3000       | No       |
+| 302          | 3     | deluxe    | city view    | non ac       | 3000       | No       |
+| 303          | 3     | deluxe    | city view    | ac           | 5000       | No       |
+| 304          | 3     | single    | sea view     | non ac       | 1500       | No       |
+| 401          | 4     | deluxe    | sea view     | non ac       | 3000       | No       |
+| 402          | 4     | double    | city view    | non ac       | 1500       | No       |
+| 403          | 4     | deluxe    | city view    | non ac       | 3000       | No       |
+| 404          | 4     | double    | city view    | ac           | 1000       | No       |
+| 501          | 5     | single    | sea view     | ac           | 1000       | No       |
+| 502          | 5     | double    | sea view     | ac           | 1200       | No       |
+| 503          | 5     | deluxe    | city view    | ac           | 3000       | No       |
+| 504          | 5     | single    | city view    | non ac       | 1350       | No       |
+| 601          | 6     | single    | city view    | ac           | 1000       | No       |
+| 602          | 6     | single    | sea view     | ac           | 1350       | No       |
+| 603          | 6     | deluxe    | sea view     | ac           | 5000       | No       |
+| 604          | 6     | deluxe    | city view    | non ac       | 3000       | No       |
+| 701          | 7     | deluxe    | sea view     | non ac       | 5000       | No       |
+| 702          | 7     | single    | city view    | non ac       | 1000       | No       |
+| 703          | 7     | single    | sea view     | non ac       | 1000       | No       |
+| 704          | 7     | deluxe    | sea view     | non ac       | 5000       | No       |
+| 801          | 8     | deluxe    | sea view     | ac           | 5000       | No       |
+| 802          | 8     | deluxe    | city view    | non ac       | 3000       | No       |
+| 803          | 8     | double    | sea view     | non ac       | 1350       | No       |
+| 804          | 8     | deluxe    | city view    | non ac       | 3000       | No       |
+| 901          | 9     | deluxe    | sea view     | ac           | 3000       | No       |
+| 902          | 9     | single    | sea view     | ac           | 1000       | No       |
+| 903          | 9     | single    | city view    | non ac       | 1200       | No       |
+| 904          | 9     | double    | city view    | non ac       | 1500       | No       |
+| 1001         | 10    | deluxe    | city view    | non ac       | 3000       | No       |
+| 1002         | 10    | deluxe    | sea view     | ac           | 3000       | No       |
+| 1003         | 10    | deluxe    | sea view     | non ac       | 3000       | No       |
+| 1004         | 10    | single    | city view    | ac           | 1500       | No       |
